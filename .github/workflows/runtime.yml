@@ -49,7 +49,7 @@ jobs:
           path: artifacts/casa-curator.bz2
 
       - name: Publish artifacts
-        uses: svenstaro/upload-release-action@v1-release
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: artifacts/*
