@@ -3,7 +3,18 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    size: 94374
+    url: https://github.com/bergmark/pantry/archive/5cac3baf3d7d77719c55063246d34f79f9b6875a.tar.gz
+    name: pantry
+    version: 0.5.4
+    sha256: 92f9f65e93bdeca53c21d0cee725fa4e9b8215468645547cc8e2c0ed5e94ab1d
+    pantry-tree:
+      size: 3265
+      sha256: 1e17f3ef14745f74ca454f162ec24621100762fe4269eb5336e83d6f23d2827b
+  original:
+    url: https://github.com/bergmark/pantry/archive/5cac3baf3d7d77719c55063246d34f79f9b6875a.tar.gz
 snapshots:
 - completed:
     size: 590100

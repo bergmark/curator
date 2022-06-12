@@ -4,3 +4,6 @@ resolver: lts-18.28
 # - ../pantry
 # - ../casa/casa-client
 # - ../casa/casa-types
+extra-deps:
+- github: bergmark/pantry
+  commit: 5cac3baf3d7d77719c55063246d34f79f9b6875a
