@@ -31,8 +31,9 @@ jobs:
 
       - name: Extract artifacts
         run: |
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/next:${GITHUB_REF#refs/heads/}
           mkdir -p artifacts
-          docker run -v $(pwd)/artifacts:/artifacts bergmark/curator/next bash -c 'cp -v /usr/local/bin/* /artifacts'
+          docker run -v $(pwd)/artifacts:/artifacts $IMAGE_ID bash -c 'cp -v /usr/local/bin/* /artifacts'
           bzip2 artifacts/*
 
       - name: Upload curator executable
