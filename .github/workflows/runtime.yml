@@ -25,14 +25,14 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          IMAGE_ID=docker.pkg.github.com/bergmark/curator:${GITHUB_REF#refs/heads/}
+          IMAGE_ID=docker.pkg.github.com/bergmark/curator:next
           docker build . -f Dockerfile --tag $IMAGE_ID
           docker push $IMAGE_ID
 
       - name: Extract artifacts
         run: |
           mkdir -p artifacts
-          docker run -v $(pwd)/artifacts:/artifacts bergmark/curator:${GITHUB_REF#refs/heads/} bash -c 'cp -v /usr/local/bin/* /artifacts'
+          docker run -v $(pwd)/artifacts:/artifacts bergmark/curator:next bash -c 'cp -v /usr/local/bin/* /artifacts'
           bzip2 artifacts/*
 
       - name: Upload curator executable
