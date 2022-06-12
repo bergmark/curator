@@ -25,7 +25,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          IMAGE_ID=docker.pkg.github.com/bergmark/curator:next
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/next:${GITHUB_REF#refs/heads/}
           docker build . -f Dockerfile --tag $IMAGE_ID
           docker push $IMAGE_ID
 
