@@ -27,25 +27,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
       - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-      # run: docker build . -f .github/workflows/Dockerfile.runtime --tag image
+        run: |
+          IMAGE_ID=docker.pkg.github.com/bergmark/curator:${GITHUB_REF#refs/heads/}
+          docker build . -f Dockerfile --tag $IMAGE_ID
+          docker push $IMAGE_ID
 
       - name: Extract artifacts
         run: |
           mkdir -p artifacts
-          docker run -v $(pwd)/artifacts:/artifacts bergmark/curator:$GITHUB_SHA bash -c 'cp -v /usr/local/bin/* /artifacts'
+          docker run -v $(pwd)/artifacts:/artifacts bergmark/curator:${GITHUB_REF#refs/heads/} bash -c 'cp -v /usr/local/bin/* /artifacts'
           bzip2 artifacts/*
 
       - name: Upload curator executable
